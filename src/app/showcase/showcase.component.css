@@ -1,0 +1,22 @@
+.parent{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  
+     
+ 
+    
+   }
+   .child{
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+   }
+ 
+   .outer
+   {
+     background-image:url('D:\Cinni\ExpenseTracker\expense-tracker-angular\src\assets\bg1.png');
+     min-width: 100%;
+     min-height: 100vh;
+   }
