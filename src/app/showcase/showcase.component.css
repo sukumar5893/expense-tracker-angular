@@ -16,7 +16,9 @@
  
    .outer
    {
-     background-image:url('D:\Cinni\ExpenseTracker\expense-tracker-angular\src\assets\bg1.png');
+     background-image:url('/assets/bg1.png');
+     background-repeat: no-repeat;
+     background-size: 100%;
      min-width: 100%;
      min-height: 100vh;
    }

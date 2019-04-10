@@ -9,6 +9,10 @@ import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { ShowcaseComponent } from './showcase/showcase.component';
 import { SignupComponent } from './signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserService } from './user.service';
+import { AuthService } from './auth.service';
+import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -16,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     LoginDialogComponent,
     ShowcaseComponent,
-    SignupComponent
+    SignupComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -24,9 +29,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     DemoMaterialModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [UserService, AuthService],
   bootstrap: [AppComponent],
   entryComponents: [LoginDialogComponent, SignupComponent]
 })

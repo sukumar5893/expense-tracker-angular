@@ -1,28 +1,30 @@
-<div class="container" style="height:500px">
+<div class="container" style="height:430px">
 
 
-  <h2>Sign Up</h2><br>
+  <h2 style="color: #169d53;">Sign Up</h2>
+  <br>
 
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
     <div class="form-group">
-      <input type="text" class="form-control" formControlName="firstname" placeholder="First Name"
-        [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }">
-      <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
-        <div *ngIf="f.firstname.errors.required">First Name is required</div>
-        <div *ngIf="f.firstname.errors.minlength">First Name must atleast be 2 characters</div>
-        <div *ngIf="f.firstname.errors.maxlength">First Name cannot be more than 100 characters</div>
+      <input type="text" class="form-control" formControlName="name" placeholder="Name"
+        [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+      <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+        <div *ngIf="f.name.errors.required">Name is required</div>
+        <div *ngIf="f.name.errors.minlength">Name must atleast be 2 characters</div>
+        <div *ngIf="f.name.errors.maxlength">Name cannot be more than 30 characters</div>
       </div>
     </div>
+
     <div class="form-group">
-      <input type="text" class="form-control" formControlName="lastname" placeholder="Last Name"
-        [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }">
-      <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
-        <div *ngIf="f.lastname.errors.required">Last Name is required</div>
-        <div *ngIf="f.lastname.errors.minlength">Last Name must atleast be 2 characters</div>
-        <div *ngIf="f.lastname.errors.maxlength">Last Name cannot be more than 100 characters</div>
+      <input type="text" class="form-control" formControlName="phone" placeholder="Phone Number (optional)"
+        [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+        <div *ngIf="f.phone.errors.minlength">Phone must be 10 numbers</div>
+        <div *ngIf="f.phone.errors.maxlength">Phone must be 10 numbers</div>
       </div>
     </div>
+
     <div class="form-group">
       <input type="email" class="form-control" formControlName="email" placeholder="Email Id"
         [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
@@ -33,25 +35,10 @@
         <div *ngIf="f.email.errors.customEmail">Email must be a valid email address</div>
       </div>
     </div>
-    <div class="form-group">
-      <input type="text" class="form-control" formControlName="phone" placeholder="Phone Number"
-        [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
-      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
-        <div *ngIf="f.phone.errors.required">Phone is required</div>
-        <div *ngIf="f.phone.errors.minlength">Phone must be 10 numbers</div>
-        <div *ngIf="f.phone.errors.maxlength">Phone must be 10 numbers</div>
-      </div>
-    </div>
 
-    <div class="form-group">
-      <input type="text" class="form-control" formControlName="username" placeholder="Username"
-        [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
-      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-        <div *ngIf="f.username.errors.required">Username is required</div>
-        <div *ngIf="f.username.errors.minlength">Username must atleast be 5 characters</div>
-        <div *ngIf="f.username.errors.maxlength">Username cannot be more than 50 characters</div>
-      </div>
-    </div>
+
+
+
     <div class="form-group">
       <input type="password" formControlName="password" class="form-control" placeholder="Password"
         [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
@@ -60,27 +47,20 @@
         <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
       </div>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password"
         [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
       <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
         <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
         <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
       </div>
-    </div>
-    <mat-dialog-actions>
-      <div class="row">
-        <div class="col-6">
-          <button style="margin-left:150px" mat-raised-button type="button" class="btn btn-secondary"
-            (click)="onCloseCancel()">Cancel</button>
-        </div>
-        <div class="col-6">
-          <button style="margin-left:100px" mat-raised-button type="button" class="btn btn-info"
-            (click)="onCloseConfirm()">Submit</button>
+    </div> -->
 
-        </div>
-      </div>
-    </mat-dialog-actions>
+    <button style="margin-left:130px;margin-top:40px" mat-raised-button type="button" class="btn btn-secondary"
+      (click)=onCloseCancel()>Cancel</button>
+    <button style="margin-left:100px" mat-raised-button type="submit" class="btn btn-success">Submit</button>
+
+
 
   </form>
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 
 
@@ -9,16 +11,33 @@ import { MatDialogRef } from '@angular/material';
   styleUrls: ['./login-dialog.component.css']
 })
 export class LoginDialogComponent implements OnInit {
+
   username: string = "";
   password: string = "";
 
-  constructor(public DialogRef: MatDialogRef<LoginDialogComponent>) { }
+  constructor(
+    public DialogRef: MatDialogRef<LoginDialogComponent>,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
-  onCloseConfirm() {
-    this.DialogRef.close('Confirm');
+  async login() {
+
+    const isValid: Boolean = await this.authService.login(this.username, this.password);
+    try {
+      if (isValid) {
+        this.router.navigate(["home"]);
+        this.DialogRef.close('Login');
+      }
+    }
+    catch (err) {
+      console.log(err)
+      alert(err)
+    }
   }
+
   onCloseCancel() {
     this.DialogRef.close('Cancel');
   }

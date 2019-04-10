@@ -1,6 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
+import { UserService } from '../user.service';
+
+//custom validator to check that two fields match
+// export function MustMatch(controlName: string, matchingControlName: string) {
+//   return (formGroup: FormGroup) => {
+//     const control = formGroup.controls[controlName];
+//     const matchingControl = formGroup.controls[matchingControlName];
+
+//     if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+//       // return if another validator has already found an error on the matchingControl
+//       return;
+//     }
+
+//     // set error on matchingControl if validation fails
+//     if (control.value !== matchingControl.value) {
+//       matchingControl.setErrors({ mustMatch: true });
+//     } else {
+//       matchingControl.setErrors(null);
+//     }
+//   }
+// }
 
 export function customEmail(controlName: string) {
   return (formGroup: FormGroup) => {
@@ -28,30 +49,50 @@ export function customEmail(controlName: string) {
 })
 export class SignupComponent implements OnInit {
   registerForm: FormGroup;
+  submitted: boolean = false;
   constructor(private formBuilder: FormBuilder,
-    public DialogRef: MatDialogRef<SignupComponent>) { }
+    public DialogRef: MatDialogRef<SignupComponent>,
+    private userService: UserService) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      firstname: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(2)]],
-      lastname: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(2)]],
+      name: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email, Validators.minLength(5)]],
-      phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      designation: ['', Validators.required, Validators.minLength(5)],
-      username: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]]
-      // password: ['', [Validators.required, Validators.minLength(6)]],
-      // confirmPassword: ['', Validators.required]
+      phone: ['', [Validators.minLength(10), Validators.maxLength(10)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      //confirmPassword: ['', Validators.required]
     },
       {
-        validator: [customEmail('email')] //MustMatch('password', 'confirmPassword'),
+        validator: [customEmail('email')]  //, MustMatch('password', 'confirmPassword')
       }
     );
   }
-  onCloseConfirm() {
-    this.DialogRef.close('Confirm');
+
+  get f() { return this.registerForm.controls; }
+
+  async onSubmit() {
+    try {
+      this.submitted = true;
+
+
+      // stop here if form is invalid
+      if (this.registerForm.invalid) return;
+
+      await this.userService.addUser(this.registerForm.value)
+      alert('SUCCESS!! :-)');
+
+    }
+    catch (err) {
+      console.log(err)
+      alert(err)
+    }
+
+
+
   }
   onCloseCancel() {
     this.DialogRef.close('Cancel');
   }
+
 
 }

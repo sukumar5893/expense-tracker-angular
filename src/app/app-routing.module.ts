@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import { HomeComponent } from './home/home.component'
 import { ShowcaseComponent } from './showcase/showcase.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ShowcaseComponent
+  },
+  {
+    path: 'home',
+    component: HomeComponent
   }
 
 ];
