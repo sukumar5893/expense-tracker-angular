@@ -1,0 +1,12 @@
+<div class="container">
+  <form class="form" [formGroup]="setLimit">
+    <mat-form-field class="full-width">
+      <input class="form-control" formControlName="min_bal" matInput placeholder="Set spending limit">
+    </mat-form-field>
+  </form>
+
+  <button style="margin-left:130px;margin-top:40px" mat-raised-button type="button" class="btn btn-secondary"
+    (click)=onCloseCancel()>Cancel</button>
+  <button style="margin-left:100px" mat-raised-button type="submit" class="btn btn-success"
+    (click)=onSubmit()>Save</button>
+</div>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { UserService } from '../user.service';
+import { MatDialog } from '@angular/material';
+import { LimitComponent } from '../limit/limit.component';
 
 //custom validator to check that two fields match
 // export function MustMatch(controlName: string, matchingControlName: string) {
@@ -52,7 +54,8 @@ export class SignupComponent implements OnInit {
   submitted: boolean = false;
   constructor(private formBuilder: FormBuilder,
     public DialogRef: MatDialogRef<SignupComponent>,
-    private userService: UserService) { }
+    private userService: UserService,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -78,8 +81,17 @@ export class SignupComponent implements OnInit {
       // stop here if form is invalid
       if (this.registerForm.invalid) return;
 
+
       await this.userService.addUser(this.registerForm.value)
-      alert('SUCCESS!! :-)');
+
+
+
+      alert('Welcome ' + this.registerForm.value.name);
+      this.DialogRef.close('Submit');
+      let dialogRef = this.dialog.open(LimitComponent, {
+        width: '600px',
+        height: '500px'
+      });
 
     }
     catch (err) {

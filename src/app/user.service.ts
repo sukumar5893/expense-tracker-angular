@@ -7,12 +7,18 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers() {
-    return this.http.get("http://localhost:3000/users").toPromise()
+  getLimitData() {
+    return this.http.get("http://localhost:3000/users/limitdata").toPromise()
   }
 
   addUser(user: any) {
 
     return this.http.post("http://localhost:3000/users", user).toPromise()
   }
+
+  addLimit(limit) {
+    return this.http.post("http://localhost:3000/users/limit", limit).toPromise()
+  }
+
+
 }
